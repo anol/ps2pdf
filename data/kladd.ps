@@ -1,0 +1,75 @@
+%!PS-Adobe-2.0
+%%Creator: kladd
+%%CreationDate: Thu Oct 27 21:12:04 CEST 2016
+%%Title: output.ps
+%%Pages: 1
+%%PageOrder: Ascend
+%%BoundingBox: 0 0 2938 440
+%%DocumentPaperSizes: A4
+%%Orientation: Portrait
+%%EndComments
+%%Page: 1 1
+%%BeginPageSetup
+/pagelevel save def
+%%EndPageSetup
+
+/B matrix currentmatrix def
+(data/transform.inc) run
+
+% % --- first the outer text ---
+% % set up the transform
+% % the bounding box of the imported file
+% /llx 81 def
+% /lly 713 def
+% /urx 389 def
+% /ury 719 def
+%
+% % the dimensions of the box we are displaying
+% /boxwidth urx llx sub def
+% /boxheight ury lly sub def
+%
+% % the angles where the circular text starts and ends
+% /A0 270 7 sub def
+% /A1 -90 7 add def
+%
+% % radius of the circular text
+% /radius 100 def
+%
+% % proportion of a full circle the text takes up
+% /factor A0 A1 sub 360 div def
+%
+% % the length it will take up on the circle
+% /truelength factor 3.1416 mul 2 mul radius mul def
+%
+% % the transform itself
+/f { 1 dict begin
+/y exch lly sub def
+/x exch llx sub def
+/T 1 x boxwidth div sub A0 A1 sub mul A1 add def
+/R 100 boxheight 2 div sub y truelength boxwidth div mul add def
+    T cos R mul T sin R mul
+    end } def
+
+gsave
+transformdict begin
+    /f load set-transform
+    % set the base coordinate system
+    B set-base
+    1 dict begin
+    /showpage{} def
+    (data/text1.eps) run
+    end % the temporary dictionary
+end % transformdict
+grestore
+
+% --- now the inner text ---
+% 0.92 dup scale
+% -91 -683 translate
+% 58 98 translate
+
+1 dict begin
+/showpage{} def
+(data/text2.eps) run
+end
+
+%%EOF
