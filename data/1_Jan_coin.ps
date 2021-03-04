@@ -1,0 +1,144 @@
+%!PS-Adobe-2.0
+%%Creator: kladd
+%%CreationDate: Thu Oct 27 21:12:04 CEST 2016
+%%Title: 1 Jan coin.ps
+%%Pages: 1
+%%PageOrder: Ascend
+%%BoundingBox: 0 0 2938 440
+%%DocumentPaperSizes: A4
+%%Orientation: Portrait
+%%EndComments
+%%Page: 1 1
+%%BeginPageSetup
+/pagelevel save def
+%%EndPageSetup
+
+% Ouotside circle
+/outsidecircletext {
+    circtextdict begin
+        /radius exch def
+        /centerangle exch def
+        /ptsize exch def
+        /str exch def
+        /xradius radius ptsize 4 div add def
+        gsave
+            centerangle str findhalfangle add rotate
+            str {
+                /charcode exch def
+                ( ) dup 0 charcode put outsideplacechar
+            } forall
+        grestore
+    end
+} def
+
+% Inside circle
+/insidecircletext {
+    circtextdict begin
+        /radius exch def
+        /centerangle exch def
+        /ptsize exch def
+        /str exch def
+        /xradius radius ptsize 3 div sub def
+        gsave
+            centerangle str findhalfangle sub rotate
+            str {
+                /charcode exch def
+                ( ) dup 0 charcode put insideplacechar
+            } forall
+        grestore
+    end
+} def
+
+%
+/circtextdict 16 dict def
+
+%
+circtextdict begin
+    /findhalfangle {
+        stringwidth pop 2 div
+        2 xradius mul pi mul div 360 mul
+    } def
+    /outsideplacechar {
+        /char exch def
+        /halfangle char findhalfangle def
+        gsave
+            halfangle neg rotate
+            radius 0 translate
+            -90 rotate
+            char stringwidth pop 2 div neg 0 moveto
+            char show
+        grestore
+        halfangle 2 mul neg rotate
+    } def
+    /insideplacechar {
+        /char exch def
+        /halfangle char findhalfangle def
+        gsave
+            halfangle rotate
+            radius 0 translate
+            90 rotate
+            char stringwidth pop 2 div neg 0 moveto
+            char show
+        grestore
+        halfangle 2 mul rotate
+    } def
+    /pi 3.1415923 def
+end
+
+%
+/doACircle {
+    /radius exch def
+    0 0 radius 0 360 arc closepath fill
+    0 setgray
+    0 0 radius 0 360 arc stroke
+} def
+
+% Mainline
+306 600 translate
+0.5 0.5 scale
+
+% Front
+gsave
+10 setlinewidth
+0.6 0.9 0.2 setrgbcolor
+210 doACircle
+grestore
+gsave
+5 setlinewidth
+1 setgray
+126 doACircle
+grestore
+gsave
+/Helvetica-Bold findfont 48 scalefont setfont
+(HURDALSJOEN SPILLFORENING) 22 90 150 outsidecircletext
+(~ 2021 ~) 15 270 180 insidecircletext
+grestore
+gsave
+/Times-Bold findfont 250 scalefont setfont
+-67 -80 moveto
+(1) show
+grestore
+
+% Back
+0 -600 translate
+gsave
+10 setlinewidth
+0.6 0.9 0.2 setrgbcolor
+210 doACircle
+grestore
+gsave
+5 setlinewidth
+1 setgray
+126 doACircle
+grestore
+gsave
+/Helvetica-Bold findfont 48 scalefont setfont
+(o|o|o|o|o   ER ALLTID   o|o|o|o|o) 22 90 150 outsidecircletext
+( FARLIG ) 15 270 180 insidecircletext
+/Helvetica-Bold findfont 96 scalefont setfont
+-96 -36 moveto (JAN) show
+grestore
+
+showpage
+
+%%EOF
